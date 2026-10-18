@@ -1,0 +1,69 @@
+# 素材归档 · NAS
+
+把照片、视频和文档按设备、格式、年月整理到归档目录。先扫描预览，再手动复制；保留素材原件，并按内容去重。
+
+这是使用教程和安装包发布仓库，应用源码不在此仓库公开。
+
+## 下载与安装
+
+**当前版本：1.2.0 · 2026-10-18**　[查看最新版本与全部下载](https://github.com/superdaxigua/material-archiver/releases/latest)
+
+| 使用方式 | 安装入口 | 完整教程 |
+|---|---|---|
+| 飞牛应用中心 | [下载 FPK 1.2.0](https://github.com/superdaxigua/material-archiver/releases/download/v1.2.0/material-archiver-1.2.0.fpk) | [飞牛安装与使用](docs/fnos.md) |
+| Docker / Compose | 镜像 `superdaxigua/material-archiver:1.2.0` | [Docker 安装与使用](docs/docker.md) |
+| NAS 图形界面部署 | [下载 Compose 配置](https://github.com/superdaxigua/material-archiver/releases/download/v1.2.0/docker-compose.yml) | [Docker 教程中的图形界面配置](docs/docker.md#使用-nas-图形界面) |
+
+镜像地址：[Docker Hub](https://hub.docker.com/r/superdaxigua/material-archiver) · [GHCR](https://github.com/users/superdaxigua/packages/container/package/material-archiver)。均可免登录拉取，提供 `1.2.0`、`1.2`、`latest` 标签；日常部署建议固定完整版本。
+
+## 能做什么
+
+- 按设备、文件类型和日期整理图片、视频、文档及其他文件。
+- 支持设备名称映射，分类字段可调整、排序。
+- 扫描后查看预览和预计复制容量，确认后开始复制。
+- 根据内容去重；同名不同内容保留为不同副本。
+- 查看任务进度，取消、继续、重试失败项。
+- 使用应用独立账号登录，支持忘记账号后的管理员恢复。
+
+例如：
+
+```text
+归档目录/
+├── 图片/相机名称/非RAW/2026/10/photo.jpg
+├── 视频/设备名称/2026/10/clip.mov
+├── 文档/PDF/2026/10/report.pdf
+└── 其他/ZIP/archive.zip
+```
+
+实际路径取决于元数据与所选规则。缺少拍摄日期时归入“日期未知”，缺少设备时显示“未知设备”；归档年月固定按北京时间 UTC+8 计算。
+
+## 第一次使用
+
+1. 按自己的部署方式安装，并准备独立的测试输出目录。
+2. 打开 `http://NAS地址:8765`，首次自行创建用户名和密码；密码至少 8 个字符。
+3. 选择源目录和输出目录。Docker 页面使用容器内路径；飞牛页面选择应用中心已授权的目录。
+4. 调整分类规则和设备名称映射，点击扫描并检查预览。
+5. 确认后点击“开始归档”，在最近任务中查看结果。
+
+建议先复制少量测试素材确认路径与权限。应用执行复制归档，不移动、不删除原件；归档副本不能替代独立备份。输出位置需要支持硬链接，例如本地 ext4/Btrfs。
+
+## 平台与验证范围
+
+| 环境 | 状态 |
+|---|---|
+| Docker linux/amd64（Intel/AMD 64 位） | 原生 CI 与飞牛 NAS 验收通过 |
+| Docker linux/arm64（ARM 64 位） | 原生 ARM CI 通过；未做 ARM NAS 实机验收 |
+| 飞牛 FPK | 需要 fnOS 1.2.0401+、Python 3.12 应用依赖；x86_64 实机验收通过，ARM 未验证 |
+| 群晖、威联通、Unraid、TrueNAS SCALE | 可按 Docker/Compose 方式部署，理论支持，未逐平台实机验证 |
+
+容器不支持 i386、armv7。Docker Hub/GHCR 的可达性取决于网络；本次验收 NAS 直连仓库超时，经开发机下载、逐层校验后中转导入完成发布镜像验收。
+
+## 更多说明
+
+- [Docker：挂载、权限、更新和恢复](docs/docker.md)
+- [飞牛：下载、安装、授权和恢复](docs/fnos.md)
+- [常见问题](docs/faq.md)
+- [版本更新记录](CHANGELOG.md)
+- [发布文件校验](docs/downloads.md)
+
+遇到问题可在 [Issues](https://github.com/superdaxigua/material-archiver/issues) 反馈，附版本、部署方式、复现步骤及脱敏后的报错。请勿上传账号密码、Cookie、令牌或真实私密素材。

@@ -1,0 +1,14 @@
+services:
+  archiver:
+    image: superdaxigua/material-archiver:1.2.0
+    ports:
+      - "8765:8765"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+    volumes:
+      - /path/on/nas/material-archiver/config:/config
+      - /path/on/nas/source:/media/source:ro
+      - /path/on/nas/archive:/media/output
+    stop_grace_period: 30s
+    restart: unless-stopped
