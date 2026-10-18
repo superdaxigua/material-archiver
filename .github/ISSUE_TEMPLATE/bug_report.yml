@@ -1,0 +1,67 @@
+name: Bug 反馈
+description: 报告安装、登录、扫描或归档过程中遇到的问题。
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先[搜索已有反馈](https://github.com/superdaxigua/material-archiver/issues)，相同问题可直接补充信息。
+        反馈会公开显示。请删除密码、Cookie、令牌、个人路径和文件名等敏感信息；无需上传原始素材。
+  - type: input
+    id: version
+    attributes:
+      label: 软件版本
+      description: 飞牛版填写应用中心的版本；Docker 版填写镜像标签，若使用 latest 请附镜像摘要或拉取日期。
+      placeholder: 例如：1.2.0
+    validations:
+      required: true
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: 安装方式
+      options:
+        - 飞牛应用（fpk）
+        - Docker / Docker Compose
+        - 本地运行 / 其他
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: 请填写 NAS 品牌、系统及版本、处理器架构、浏览器及版本；Docker 用户请补充镜像地址。
+      placeholder: 飞牛 fnOS 1.2.x，x86_64，Chrome …
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请描述从哪个页面、进行哪些操作后出现问题。归档问题请补充文件格式、目录规则和相关授权或挂载方式。
+      placeholder: |
+        1. …
+        2. …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+      placeholder: 你希望发生什么？
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+      description: 请附页面报错原文；如有截图，可粘贴或拖入此处。
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志或失败记录（可选）
+      description: 可粘贴相关日志、脱敏后的失败 JSON，或 Docker 挂载配置。提交前请删除敏感信息。
+      render: text

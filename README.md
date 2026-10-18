@@ -67,3 +67,9 @@
 - [发布文件校验](docs/downloads.md)
 
 遇到问题可在 [Issues](https://github.com/superdaxigua/material-archiver/issues) 反馈，附版本、部署方式、复现步骤及脱敏后的报错。请勿上传账号密码、Cookie、令牌或真实私密素材。
+
+## 问题反馈与功能建议
+
+遇到问题或有改进建议，请登录 GitHub 后打开[反馈入口](https://github.com/superdaxigua/material-archiver/issues/new/choose)，选择「Bug 反馈」或「功能建议」中文表单。提交前请先[搜索已有反馈](https://github.com/superdaxigua/material-archiver/issues)，相同问题可直接补充信息，处理进度也会记录在那里。
+
+报告 Bug 时，请填写软件版本、安装方式、运行环境、复现步骤、预期结果和实际结果，可附报错截图、相关日志或失败记录。Docker 用户请补充镜像标签（使用 latest 时附镜像摘要或拉取日期）及挂载配置。公开提交前请删除密码、Cookie、令牌、个人路径和文件名等敏感信息，无需上传原始素材。
