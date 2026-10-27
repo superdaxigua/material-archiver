@@ -27,7 +27,7 @@ id 用户名
 ```yaml
 services:
   archiver:
-    image: superdaxigua/material-archiver:1.2.0
+    image: superdaxigua/material-archiver:1.3.0
     ports:
       - "8765:8765"
     environment:
@@ -55,7 +55,7 @@ docker compose up -d
 docker compose ps
 ```
 
-无需登录 Docker Hub。备用镜像为 `ghcr.io/superdaxigua/material-archiver:1.2.0`，可替换 Compose 的 `image`；两个仓库内容相同。若拉取超时，先确认 NAS 到对应仓库的网络连通性。
+无需登录 Docker Hub。备用镜像为 `ghcr.io/superdaxigua/material-archiver:1.3.0`，可替换 Compose 的 `image`；两个仓库内容相同。若拉取超时，先确认 NAS 到对应仓库的网络连通性。
 
 打开 `http://NAS地址:8765`（或你修改的端口），首次自行创建应用账号。容器状态应逐渐显示为 healthy；没有创建账号时也可以健康。
 
@@ -64,6 +64,8 @@ docker compose ps
 源目录选择 `/media/source`，输出目录选择 `/media/output`。网页看不到宿主的 `/vol1/...`、`/vol2/...` 等路径，应选择冒号右边的容器路径。
 
 先调整规则、扫描并检查预览。预览不会复制素材；手动开始后才生成副本。再次扫描相同素材会按内容去重，不会覆盖同名但不同内容的既有文件。
+
+1.3.0 的 XMP 与 Live Photo 按素材组规划；预览可翻页和筛选待处理项。扫描或复制时设置不可编辑，预览后修改设置会要求重新扫描。具体规则见[关联资源说明](associated-resources.md)。
 
 新副本使用配置的 UID/GID；既有副本和输出目录不会被递归更改属主。输出不可写时，预览前会提示检查只读挂载、PUID/PGID 或 NAS 权限。
 
@@ -79,7 +81,7 @@ docker compose ps
 | Unraid | 使用 Docker 容器配置，填写镜像、PUID/PGID、三个挂载和端口 |
 | TrueNAS SCALE | 具有 Docker/Compose 功能的版本使用自定义应用或 YAML 部署，并检查数据集 ACL |
 
-手动创建容器时，镜像填 `superdaxigua/material-archiver:1.2.0`，容器 HTTP 端口为 8765，其余参数与 YAML 保持一致。不同版本界面名称可能不同；除飞牛外，上述平台未做实机验收。
+手动创建容器时，镜像填 `superdaxigua/material-archiver:1.3.0`，容器 HTTP 端口为 8765，其余参数与 YAML 保持一致。不同版本界面名称可能不同；1.3.0 尚未逐平台实机验收；飞牛历史版本的实机结果不能替代本次新功能验证。
 
 ## 新增素材挂载
 
@@ -104,7 +106,9 @@ docker compose up -d
 docker compose ps
 ```
 
-必须继续使用原来的 `/config` 和归档目录。固定 `1.2.0` 时，单纯 pull 不会自动切换到未来的其他版本；使用 latest 前也应先阅读更新记录。修改挂载和环境变量后，使用 `up -d` 重建应用配置。
+必须继续使用原来的 `/config` 和归档目录。固定 `1.3.0` 时，单纯 pull 不会自动切换到未来的其他版本；使用 latest 前也应先阅读更新记录。修改挂载和环境变量后，使用 `up -d` 重建应用配置。
+
+从 1.2.0 升级后，原有单文件任务保留历史结果，不会自动认定已验证配套关系。请重新扫描源目录，检查新增 XMP 和 Live Photo 的关联计划；不要删除历史输出目录。
 
 正常停止会清理当前未完成的临时副本；重启后可在原任务继续或重试。不要在复制过程中直接断电或强制结束；断电后的历史隐藏临时文件需要确认没有活动任务后再处理。
 
@@ -128,3 +132,4 @@ docker compose logs --tail 100 archiver
 ```
 
 本教程不要求开放公网端口。优先在可信局域网试用。[返回首页](../README.md)
+

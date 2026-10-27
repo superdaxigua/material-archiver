@@ -6,21 +6,23 @@
 
 ## 下载与安装
 
-**当前版本：1.2.0 · 2026-10-18**　[查看最新版本与全部下载](https://github.com/superdaxigua/material-archiver/releases/latest)
+**当前版本：1.3.0 · 2026-10-27**　[查看最新版本与全部下载](https://github.com/superdaxigua/material-archiver/releases/latest)
 
 | 使用方式 | 安装入口 | 完整教程 |
 |---|---|---|
-| 飞牛应用中心 | [下载 FPK 1.2.0](https://github.com/superdaxigua/material-archiver/releases/download/v1.2.0/material-archiver-1.2.0.fpk) | [飞牛安装与使用](docs/fnos.md) |
-| Docker / Compose | 镜像 `superdaxigua/material-archiver:1.2.0` | [Docker 安装与使用](docs/docker.md) |
-| NAS 图形界面部署 | [下载 Compose 配置](https://github.com/superdaxigua/material-archiver/releases/download/v1.2.0/docker-compose.yml) | [Docker 教程中的图形界面配置](docs/docker.md#使用-nas-图形界面) |
+| 飞牛应用中心 | [下载 FPK 1.3.0](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.0/material-archiver-1.3.0.fpk) | [飞牛安装与使用](docs/fnos.md) |
+| Docker / Compose | 镜像 `superdaxigua/material-archiver:1.3.0` | [Docker 安装与使用](docs/docker.md) |
+| NAS 图形界面部署 | [下载 Compose 配置](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.0/docker-compose.yml) | [Docker 教程中的图形界面配置](docs/docker.md#使用-nas-图形界面) |
 
-镜像地址：[Docker Hub](https://hub.docker.com/r/superdaxigua/material-archiver) · [GHCR](https://github.com/users/superdaxigua/packages/container/package/material-archiver)。均可免登录拉取，提供 `1.2.0`、`1.2`、`latest` 标签；日常部署建议固定完整版本。
+镜像地址：[Docker Hub](https://hub.docker.com/r/superdaxigua/material-archiver) · [GHCR](https://github.com/users/superdaxigua/packages/container/package/material-archiver)。均可免登录拉取，提供 `1.3.0`、`1.3`、`latest` 标签；日常部署建议固定完整版本。
 
 ## 能做什么
 
 - 按设备、文件类型和日期整理图片、视频、文档及其他文件。
 - 支持设备名称映射，分类字段可调整、排序。
-- 扫描后查看预览和预计复制容量，确认后开始复制。
+- 关联 XMP 随照片归档；确认配对的 Live Photo 照片与视频共用照片目录和主文件名。
+- 完整预览按素材组分页，展示关联依据、目标路径和待处理原因。
+- 分别查看物理文件、成员副本、素材组数量和预计复制容量，确认后开始复制。
 - 根据内容去重；同名不同内容保留为不同副本。
 - 查看任务进度，取消、继续、重试失败项。
 - 使用应用独立账号登录，支持忘记账号后的管理员恢复。
@@ -43,7 +45,7 @@
 2. 打开 `http://NAS地址:8765`，首次自行创建用户名和密码；密码至少 8 个字符。
 3. 选择源目录和输出目录。Docker 页面使用容器内路径；飞牛页面选择应用中心已授权的目录。
 4. 调整分类规则和设备名称映射，点击扫描并检查预览。
-5. 确认后点击“开始归档”，在最近任务中查看结果。
+5. 检查完整计划与待处理项后点击“开始归档”，在最近任务中查看成员结果；修改设置需重新扫描。
 
 建议先复制少量测试素材确认路径与权限。应用执行复制归档，不移动、不删除原件；归档副本不能替代独立备份。输出位置需要支持硬链接，例如本地 ext4/Btrfs。
 
@@ -51,17 +53,19 @@
 
 | 环境 | 状态 |
 |---|---|
-| Docker linux/amd64（Intel/AMD 64 位） | 原生 CI 与飞牛 NAS 验收通过 |
+| Docker linux/amd64（Intel/AMD 64 位） | 1.3.0 原生 CI 验证；历史 1.2.0 有飞牛 NAS 实机记录 |
 | Docker linux/arm64（ARM 64 位） | 原生 ARM CI 通过；未做 ARM NAS 实机验收 |
-| 飞牛 FPK | 需要 fnOS 1.2.0401+、Python 3.12 应用依赖；x86_64 实机验收通过，ARM 未验证 |
+| 飞牛 FPK | 需要 fnOS 1.2.0401+、Python 3.12 应用依赖；1.3.0 尚未实机升级，历史版本有 x86_64 实机记录；ARM 未验证 |
 | 群晖、威联通、Unraid、TrueNAS SCALE | 可按 Docker/Compose 方式部署，理论支持，未逐平台实机验证 |
 
-容器不支持 i386、armv7。Docker Hub/GHCR 的可达性取决于网络；本次验收 NAS 直连仓库超时，经开发机下载、逐层校验后中转导入完成发布镜像验收。
+容器不支持 i386、armv7。Docker Hub/GHCR 的可达性取决于网络；历史 1.2.0 的 NAS 直连仓库曾超时，经开发机中转完成镜像验收；不代表 1.3.0 已完成 NAS 实机验收。
 
 ## 更多说明
 
 - [Docker：挂载、权限、更新和恢复](docs/docker.md)
 - [飞牛：下载、安装、授权和恢复](docs/fnos.md)
+- [照片、XMP 与 Live Photo 的整理规则](docs/associated-resources.md)
+- [从旧版升级到 1.3.0](docs/associated-resources.md#从旧版本升级)
 - [常见问题](docs/faq.md)
 - [版本更新记录](CHANGELOG.md)
 - [发布文件校验](docs/downloads.md)
@@ -73,3 +77,4 @@
 遇到问题或有改进建议，请登录 GitHub 后打开[反馈入口](https://github.com/superdaxigua/material-archiver/issues/new/choose)，选择「Bug 反馈」或「功能建议」中文表单。提交前请先[搜索已有反馈](https://github.com/superdaxigua/material-archiver/issues)，相同问题可直接补充信息，处理进度也会记录在那里。
 
 报告 Bug 时，请填写软件版本、安装方式、运行环境、复现步骤、预期结果和实际结果，可附报错截图、相关日志或失败记录。Docker 用户请补充镜像标签（使用 latest 时附镜像摘要或拉取日期）及挂载配置。公开提交前请删除密码、Cookie、令牌、个人路径和文件名等敏感信息，无需上传原始素材。
+
