@@ -14,7 +14,7 @@ Docker：确认输出挂载没有 `ro`，PUID/PGID 与 NAS 用户数字身份匹
 
 ## 为什么没有马上生成副本
 
-扫描是预览阶段，确认后需要手动开始归档。复制结果和错误可在最近任务中查看。
+扫描是预览阶段，确认后需要手动开始归档。复制结果和错误可在“任务记录”中查看。
 
 ## 为什么日期是“日期未知”，或年月与预期不同
 
@@ -46,7 +46,7 @@ Docker：确认输出挂载没有 `ro`，PUID/PGID 与 NAS 用户数字身份匹
 
 ## Docker Hub 或 GHCR 拉取超时
 
-先确认镜像名正确：`superdaxigua/material-archiver:1.3.0` 或 `ghcr.io/superdaxigua/material-archiver:1.3.0`。两仓库公开，无需登录。网络超时不代表镜像不存在；检查 NAS 网络与镜像仓库连通性。Docker 客户端/终端的网络设置不一定等于 Docker 服务的网络设置。
+先确认镜像名正确：`superdaxigua/material-archiver:1.3.1` 或 `ghcr.io/superdaxigua/material-archiver:1.3.1`。两仓库公开，无需登录。网络超时不代表镜像不存在；检查 NAS 网络与镜像仓库连通性。Docker 客户端/终端的网络设置不一定等于 Docker 服务的网络设置。
 
 ## 8765 端口被占用
 

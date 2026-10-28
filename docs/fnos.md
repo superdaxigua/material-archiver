@@ -4,7 +4,7 @@
 
 打开 **[最新版本下载页](https://github.com/superdaxigua/material-archiver/releases/latest)**，在 Assets 中下载扩展名为 `.fpk` 的安装包。
 
-当前版本：[material-archiver-1.3.0.fpk](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.0/material-archiver-1.3.0.fpk)。同时提供 [SHA256SUMS](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.0/SHA256SUMS)，可按 [校验教程](downloads.md) 核对文件完整性。
+当前版本：[material-archiver-1.3.1.fpk](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.1/material-archiver-1.3.1.fpk)。同时提供 [SHA256SUMS](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.1/SHA256SUMS)，可按 [校验教程](downloads.md) 核对文件完整性。
 
 GitHub 自动显示的 **Source code (zip/tar.gz)** 是这个教程仓库的文档压缩包，不能作为飞牛安装包使用。请下载 `.fpk`。
 
@@ -12,7 +12,7 @@ GitHub 自动显示的 **Source code (zip/tar.gz)** 是这个教程仓库的文�
 
 - 系统需要 fnOS 1.2.0401 或更新版本。
 - 安装依赖 Python 3.12 应用，由应用中心处理依赖；按系统提示完成即可。
-- FPK 声明为 all 平台；历史版本只在 x86_64 飞牛设备验证；1.3.0 尚未在应用中心实机升级，ARM 飞牛尚未实机验证。
+- FPK 声明为 all 平台；历史版本只在 x86_64 飞牛设备验证；1.3.1 尚未在应用中心实机升级，ARM 飞牛尚未实机验证。
 
 在飞牛桌面打开 **应用中心 → 手动安装**，选择刚下载的 `.fpk`，按提示完成安装。入口位置可能随系统版本调整。
 
@@ -35,9 +35,10 @@ GitHub 自动显示的 **Source code (zip/tar.gz)** 是这个教程仓库的文�
 
 1. 从飞牛桌面入口打开应用，或访问 `http://NAS地址:8765`。
 2. 首次自行创建用户名、密码及确认密码。账号独立于飞牛系统账号，密码至少 8 个字符。
-3. 选择已授权的源目录和输出目录，调整分类规则、设备名称映射。
-4. 扫描并翻页检查完整计划，查看照片/XMP 或 Live Photo 的成员、关联依据、目标路径与待处理原因，再手动开始归档。
-5. 在最近任务查看进度和失败原因；中断后可继续，失败项可重试。
+3. 在“新建归档”选择已授权的源目录和输出目录，点击“下一步：设置规则”。
+4. 展开分类可调整字段、顺序和目录示例；设备名称映射按需填写。点击“扫描预览”进入“确认预览”。
+5. 翻页检查完整计划，展开照片/XMP 或 Live Photo 查看成员与关联依据，筛选待处理项，确认后点击“开始归档”。
+6. 在“任务记录”查看进度与失败原因；中断后可继续，失败项可重试。返回修改预览后必须重新扫描。
 
 FPK 页面选择的是已授权的宿主目录，不填写 Docker 的 `/media/source` 或 `/media/output`。源文件会保留，应用只在输出位置创建副本。
 
@@ -45,7 +46,7 @@ FPK 页面选择的是已授权的宿主目录，不填写 Docker 的 `/media/so
 
 先等待任务结束或正常取消，再备份应用配置和任务数据。通过应用中心的安装/升级流程选择新版 `.fpk`，按系统提示处理；为保留记录，不要先卸载并清除应用数据。
 
-升级后核对授权目录、账号登录、最近任务以及一小批素材的预览和复制结果。备份或配置入口以当前 fnOS 应用中心提供的功能为准。
+从 1.3.0 升级不需要数据迁移。升级后核对授权目录、账号登录、任务记录以及一小批素材的预览和复制结果。备份或配置入口以当前 fnOS 应用中心提供的功能为准。
 
 从 1.2.0 升级后，请重新扫描需要配套整理的素材；旧任务不会自动成为已验证的素材组。XMP 内容变化等未确定版本政策的情况进入待处理，不覆盖已有副本。详见[关联资源规则与升级说明](associated-resources.md)。
 
