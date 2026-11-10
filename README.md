@@ -6,15 +6,15 @@
 
 ## 下载与安装
 
-**当前版本：1.3.1 · 2026-10-28**　[查看最新版本与全部下载](https://github.com/superdaxigua/material-archiver/releases/latest)
+**当前版本：1.3.3 · 2026-11-10**　[查看最新版本与全部下载](https://github.com/superdaxigua/material-archiver/releases/latest)
 
 | 使用方式 | 安装入口 | 完整教程 |
 |---|---|---|
-| 飞牛应用中心 | [下载 FPK 1.3.1](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.1/material-archiver-1.3.1.fpk) | [飞牛安装与使用](docs/fnos.md) |
-| Docker / Compose | 镜像 `superdaxigua/material-archiver:1.3.1` | [Docker 安装与使用](docs/docker.md) |
-| NAS 图形界面部署 | [下载 Compose 配置](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.1/docker-compose.yml) | [Docker 教程中的图形界面配置](docs/docker.md#使用-nas-图形界面) |
+| 飞牛应用中心 | [下载 FPK 1.3.3](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.3/material-archiver-1.3.3.fpk) | [飞牛安装与使用](docs/fnos.md) |
+| Docker / Compose | 镜像 `superdaxigua/material-archiver:1.3.3` | [Docker 安装与使用](docs/docker.md) |
+| NAS 图形界面部署 | [下载 Compose 配置](https://github.com/superdaxigua/material-archiver/releases/download/v1.3.3/docker-compose.yml) | [Docker 教程中的图形界面配置](docs/docker.md#使用-nas-图形界面) |
 
-镜像地址：[Docker Hub](https://hub.docker.com/r/superdaxigua/material-archiver) · [GHCR](https://github.com/users/superdaxigua/packages/container/package/material-archiver)。均可免登录拉取，提供 `1.3.1`、`1.3`、`latest` 标签；日常部署建议固定完整版本。
+镜像地址：[Docker Hub](https://hub.docker.com/r/superdaxigua/material-archiver) · [GHCR](https://github.com/users/superdaxigua/packages/container/package/material-archiver)。均可免登录拉取，提供 `1.3.3`、`1.3`、`latest` 标签；日常部署建议固定完整版本。
 
 ## 能做什么
 
@@ -25,7 +25,8 @@
 - 预览突出源文件、预计复制容量、重复副本和待处理组；详细统计可展开查看。
 - 三步新建归档、独立任务记录，适配桌面与手机。
 - 根据内容去重；同名不同内容保留为不同副本。
-- 查看任务进度，取消、继续、重试失败项。
+- 查看扫描数量、当前文件和处理阶段，取消、继续、重试失败项。
+- 可勾选“将待处理文件作为单个文件归档”，将缺失配套等素材独立整理。
 - 使用应用独立账号登录，支持忘记账号后的管理员恢复。
 
 例如：
@@ -49,7 +50,7 @@
 5. 在“确认预览”查看统计、展开素材组、翻页或筛选待处理项，确认后点击“开始归档”。返回修改后需重新扫描。
 6. 在“任务记录”打开任务查看进度、成员结果或继续／重试。浏览历史不会覆盖当前页面中的新建草稿，切换页面不会取消后台任务。
 
-从 1.3.0 升级到 1.3.1 无需数据迁移；保留原有配置、账号、目录授权和任务数据。尚未扫描的新建草稿仅保留在当前页面会话，刷新页面不会保存草稿。
+从 1.3.0 / 1.3.1 升级到 1.3.3 会自动添加扫描进度记录，无需手工迁移；保留原有配置、账号、目录授权和任务数据。尚未扫描的新建草稿仅保留在当前页面会话，刷新页面不会保存草稿。
 
 建议先复制少量测试素材确认路径与权限。应用执行复制归档，不移动、不删除原件；归档副本不能替代独立备份。输出位置需要支持硬链接，例如本地 ext4/Btrfs。
 
@@ -57,19 +58,19 @@
 
 | 环境 | 状态 |
 |---|---|
-| Docker linux/amd64（Intel/AMD 64 位） | 1.3.1 原生 CI 验证；历史 1.2.0 有飞牛 NAS 实机记录 |
+| Docker linux/amd64（Intel/AMD 64 位） | 1.3.3 原生 CI 验证；历史 1.2.0 有飞牛 NAS 实机记录 |
 | Docker linux/arm64（ARM 64 位） | 原生 ARM CI 通过；未做 ARM NAS 实机验收 |
-| 飞牛 FPK | 需要 fnOS 1.2.0401+、Python 3.12 应用依赖；1.3.1 尚未实机升级，历史版本有 x86_64 实机记录；ARM 未验证 |
+| 飞牛 FPK | 需要 fnOS 1.2.0401+、Python 3.12 应用依赖；1.3.3 尚未实机升级，历史版本有 x86_64 实机记录；ARM 未验证 |
 | 群晖、威联通、Unraid、TrueNAS SCALE | 可按 Docker/Compose 方式部署，理论支持，未逐平台实机验证 |
 
-容器不支持 i386、armv7。Docker Hub/GHCR 的可达性取决于网络；历史 1.2.0 的 NAS 直连仓库曾超时，经开发机中转完成镜像验收；不代表 1.3.1 已完成 NAS 实机验收。
+容器不支持 i386、armv7。Docker Hub/GHCR 的可达性取决于网络；历史 1.2.0 的 NAS 直连仓库曾超时，经开发机中转完成镜像验收；不代表 1.3.3 已完成 NAS 实机验收。
 
 ## 更多说明
 
 - [Docker：挂载、权限、更新和恢复](docs/docker.md)
 - [飞牛：下载、安装、授权和恢复](docs/fnos.md)
 - [照片、XMP 与 Live Photo 的整理规则](docs/associated-resources.md)
-- [从旧版升级到 1.3.1](docs/associated-resources.md#从旧版本升级)
+- [从旧版升级到 1.3.3](docs/associated-resources.md#从旧版本升级)
 - [常见问题](docs/faq.md)
 - [版本更新记录](CHANGELOG.md)
 - [发布文件校验](docs/downloads.md)

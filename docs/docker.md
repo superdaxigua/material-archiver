@@ -27,7 +27,7 @@ id 用户名
 ```yaml
 services:
   archiver:
-    image: superdaxigua/material-archiver:1.3.1
+    image: superdaxigua/material-archiver:1.3.3
     ports:
       - "8765:8765"
     environment:
@@ -55,7 +55,7 @@ docker compose up -d
 docker compose ps
 ```
 
-无需登录 Docker Hub。备用镜像为 `ghcr.io/superdaxigua/material-archiver:1.3.1`，可替换 Compose 的 `image`；两个仓库内容相同。若拉取超时，先确认 NAS 到对应仓库的网络连通性。
+无需登录 Docker Hub。备用镜像为 `ghcr.io/superdaxigua/material-archiver:1.3.3`，可替换 Compose 的 `image`；两个仓库内容相同。若拉取超时，先确认 NAS 到对应仓库的网络连通性。
 
 打开 `http://NAS地址:8765`（或你修改的端口），首次自行创建应用账号。容器状态应逐渐显示为 healthy；没有创建账号时也可以健康。
 
@@ -70,6 +70,8 @@ docker compose ps
 3. **确认预览**：查看源文件数量、预计复制容量、重复副本及待处理组；展开素材组查看成员、目标位置和关联依据，确认后点击“开始归档”。
 
 预览不会复制素材；手动开始后才生成副本。再次扫描相同素材会按内容去重，不会覆盖同名但不同内容的既有文件。任务在“任务记录”中查看，取消、中断后继续和失败重试入口随状态显示。切换页面不会取消后台任务，新建草稿不会因查看历史而被覆盖；刷新页面会丢弃尚未扫描的草稿。
+
+1.3.3 可在设置规则勾选“将待处理文件作为单个文件归档”，重新扫描后独立处理缺失配套等素材；历史待处理任务提供“调整设置并重新扫描”。
 
 自 1.3.0 起，XMP 与 Live Photo 按素材组规划；预览可翻页和筛选待处理项。扫描或复制时设置不可编辑，预览后修改设置会要求重新扫描。具体规则见[关联资源说明](associated-resources.md)。
 
@@ -87,7 +89,7 @@ docker compose ps
 | Unraid | 使用 Docker 容器配置，填写镜像、PUID/PGID、三个挂载和端口 |
 | TrueNAS SCALE | 具有 Docker/Compose 功能的版本使用自定义应用或 YAML 部署，并检查数据集 ACL |
 
-手动创建容器时，镜像填 `superdaxigua/material-archiver:1.3.1`，容器 HTTP 端口为 8765，其余参数与 YAML 保持一致。不同版本界面名称可能不同；1.3.1 尚未逐平台实机验收；飞牛历史版本的实机结果不能替代本次新功能验证。
+手动创建容器时，镜像填 `superdaxigua/material-archiver:1.3.3`，容器 HTTP 端口为 8765，其余参数与 YAML 保持一致。不同版本界面名称可能不同；1.3.3 尚未逐平台实机验收；飞牛历史版本的实机结果不能替代本次新功能验证。
 
 ## 新增素材挂载
 
@@ -112,9 +114,9 @@ docker compose up -d
 docker compose ps
 ```
 
-必须继续使用原来的 `/config` 和归档目录。固定 `1.3.1` 时，单纯 pull 不会自动切换到未来的其他版本；使用 latest 前也应先阅读更新记录。修改挂载和环境变量后，使用 `up -d` 重建应用配置。
+必须继续使用原来的 `/config` 和归档目录。固定 `1.3.3` 时，单纯 pull 不会自动切换到未来的其他版本；使用 latest 前也应先阅读更新记录。修改挂载和环境变量后，使用 `up -d` 重建应用配置。
 
-从 1.3.0 升级到 1.3.1 无需数据迁移；保留原配置、账号、任务与目录。
+从 1.3.0 / 1.3.1 升级到 1.3.3 会自动添加扫描进度列，无需手工迁移；保留原配置、账号、任务与目录。
 
 从 1.2.0 升级后，原有单文件任务保留历史结果，不会自动认定已验证配套关系。请重新扫描源目录，检查新增 XMP 和 Live Photo 的关联计划；不要删除历史输出目录。
 
